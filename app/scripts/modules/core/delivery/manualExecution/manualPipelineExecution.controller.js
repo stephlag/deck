@@ -99,7 +99,7 @@ module.exports = angular.module('spinnaker.core.delivery.manualPipelineExecution
         selectedTrigger.parameters = this.parameters;
       }
 
-      if(this.pipelineIsDirty()) {
+      if (this.pipelineIsDirty()) {
         pipelineConfigService.savePipeline(pipeline)
           .then(() => $uibModalInstance.close(command) );
       } else {

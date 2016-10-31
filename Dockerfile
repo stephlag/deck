@@ -10,7 +10,9 @@ RUN chown -R node /usr/
 
 ENV HOME /home/node
 
-ENV API_HOST http://gate:8084 
+ENV API_HOST http://localhost:8084 
+
+ENV DECK_HOST 0.0.0.0
 
 USER node
 

@@ -6,7 +6,7 @@ RUN useradd -ms /bin/bash node && \
   
 USER node
 
-ENV HOME=/home/node API_HOST=http://localhost:8084 DECK_HOST=0.0.0.0
+ENV HOME=/home/node
 
 COPY . deck/
 

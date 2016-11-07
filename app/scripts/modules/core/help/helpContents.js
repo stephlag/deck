@@ -131,7 +131,7 @@ module.exports = angular.module('spinnaker.core.help.contents', [])
     'gce.httpLoadBalancer.port': 'HTTP requests can be load balanced based on port 80 or port 8080. HTTPS requests can be load balanced on port 443.',
     'gce.httpLoadBalancer.certificate': 'The name of an SSL certificate. If specified, Spinnaker will create an HTTPS load balancer.',
     'gce.httpLoadBalancer.namedPort': `
-      For HTTP(S) load balancers,
+      For HTTP(S) and SSL load balancers,
       incoming traffic is directed through a named port (for Spinnaker, the named port is <b>http</b>).
       The mapping from named port to port number is specified per server group
       and can be configured within the server group creation dialogue under <b>Port Name Mapping</b>.`,
@@ -238,11 +238,9 @@ module.exports = angular.module('spinnaker.core.help.contents', [])
     'pipeline.config.bake.templateFileName': '<p>(Optional) The explicit packer template to use, instead of resolving one from rosco\'s configuration.</p>',
     'pipeline.config.bake.varFileName': '<p>(Optional) The name of a json file containing key/value pairs to add to the packer command.</p>',
     'pipeline.config.bake.extendedAttributes': '<p>(Optional) Any additional attributes that you want to pass onto rosco, which will be injected into your packer runtime variables.</p>',
+    'pipeline.config.gce.bake.accountName': '<p>(Optional) The name of a Google account configured within Rosco. If left blank, the first configured account will be used.</p>',
     'pipeline.config.gce.bake.baseImage': '<p>(Optional) A GCE image name. For example: ubuntu-1204-precise-v20150910.</p>',
     'pipeline.config.manualJudgment.instructions': '<p>(Optional) Instructions are shown to the user when making a manual judgment.</p><p>May contain HTML.</p>',
-    'pipeline.config.manualJudgment.failPipeline': '' +
-      '<p><strong>Checked</strong> - the overall pipeline will fail whenever the manual judgment is negative.</p>' +
-      '<p><strong>Unchecked</strong> - the overall pipeline will continue executing but this particular branch will stop.</p>',
     'pipeline.config.manualJudgment.propagateAuthentication': '' +
     '<p><strong>Checked</strong> - the pipeline will continue with the permissions of the approver.</p>' +
     '<p><strong>Unchecked</strong> - the pipeline will continue with it\'s current permissions.</p>',
@@ -263,9 +261,6 @@ module.exports = angular.module('spinnaker.core.help.contents', [])
     'pipeline.config.jenkins.markUnstableAsSuccessful.false': 'If Jenkins reports the build status as UNSTABLE, ' +
       'Spinnaker will mark the stage as FAILED; subsequent execution will be determined based on the configuration of the ' +
       '<b>If build fails</b> option for this stage.',
-    'pipeline.config.failPipeline': '' +
-    '<p><strong>Checked</strong> - the overall pipeline will fail whenever the stage fails.</p>' +
-    '<p><strong>Unchecked</strong> - the overall pipeline will continue executing but this particular branch will stop.</p>',
     'pipeline.config.canary.clusterPairs': '' +
       '<p>A <em>cluster pair</em> is used to create a baseline and canary cluster.</p>' +
       '<p>The version currently deployed in the baseline cluster will be used to create a new baseline server group, while the version created in the previous bake or Find AMI stage will be deployed into the canary.</p>',
@@ -307,6 +302,7 @@ module.exports = angular.module('spinnaker.core.help.contents', [])
     'pipeline.config.timeout.bake': '<p>For the Bake stage, the timeout will apply to both the "Create Bake" and "Monitor Bake" tasks.</p>',
     'pipeline.config.timeout.deploy': '<p>For the Deploy stage, the timeout will apply to both the "Monitor Deploy" and "Wait For Up Instances" tasks.</p>',
     'pipeline.config.timeout.jenkins': '<p>For the Jenkins stage, the timeout will apply to both the "Wait For Jenkins Job Start" and "Monitor Jenkins Job" tasks.</p>',
+    'pipeline.config.trigger.runAsUser': 'The current user must have access to the specified service account, and the service account must have access to the current application. Otherwise, you\'ll receive an \'Access is denied\' error.',
     'pipeline.config.script.repoUrl': '<p>Path to the repo hosting the scripts in Stash. (e.g. <samp>CDL/mimir-scripts</samp>). Leave empty to use the default.</p>',
     'pipeline.config.script.path': '<p>Path to the folder hosting the scripts in Stash. (e.g. <samp>groovy</samp>, <samp>python</samp> or <samp>shell</samp>)</p>',
     'pipeline.config.script.command': '<p>Executable script and parameters. (e.g. <samp>script.py --ami-id ${deploymentDetails[0].ami}</samp> ) </p>',

@@ -75,13 +75,15 @@ module.exports = angular.module('spinnaker.serverGroup.configure.titus.cloneServ
 
     function configureCommand() {
       titusServerGroupConfigurationService.configureCommand(serverGroupCommand).then(function () {
+        serverGroupCommand.registry =
+          serverGroupCommand.backingData.credentialsKeyedByAccount[serverGroupCommand.credentials].registry;
         $scope.state.loaded = true;
         serverGroupCommand.viewState.groupsRemovedStream.subscribe(securityGroupsRemoved);
       });
     }
 
     this.isValid = function () {
-      return $scope.command && ($scope.command.viewState.disableImageSelection || $scope.command.image !== null) &&
+      return $scope.command && ($scope.command.viewState.disableImageSelection || $scope.command.imageId) &&
         ($scope.command.credentials !== null) &&
         ($scope.command.region !== null) &&
         ($scope.command.capacity.desired !== null) &&

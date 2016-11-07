@@ -128,9 +128,10 @@ module.exports = angular
       });
     };
 
-    let activeRefresher = schedulerFactory.createScheduler(1000);
+    let activeRefresher = null;
 
     if (this.execution.isRunning && !this.standalone) {
+      activeRefresher = schedulerFactory.createScheduler(1000 * Math.ceil(this.execution.stages.length / 10));
       let refreshing = false;
       activeRefresher.subscribe(() => {
         if (refreshing) {
@@ -144,10 +145,10 @@ module.exports = angular
           refreshing = false;
         });
       });
+      $scope.$on('$destroy', () => activeRefresher.unsubscribe());
     }
 
     $scope.$on('$destroy', () => {
-      activeRefresher.unsubscribe();
       if (this.isActive()) {
         this.hideDetails();
       }
